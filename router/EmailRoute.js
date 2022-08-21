@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 const router = express.Router();
 
 router.get("/email", (req, res) => {
-  res.send("Email Router");
+  res.render("email", { layout: "index" });
 });
 
 router.post("/email", (req, res) => {
@@ -12,17 +12,16 @@ router.post("/email", (req, res) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "abc@gmail.com",
-      pass: "zzqqwxpmvxlhticx",
+      user: req.body.user,
+      pass: req.body.password,
     },
   });
 
   const msg = {
-    from: "abc@gmail.com", // sender address
-    to: "b2c@gmail.com", // list of receivers
-    subject: "Hello mail", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<h2>Hello world?</h2>", // html body
+    from: req.body.address, // sender address
+    to: req.body.reciever, // list of receivers
+    subject: req.body.subject, // Subject line
+    text: req.body.text, // plain text body
   };
   // send mail with defined transport object
   const info = transporter.sendMail(msg, (err, info) => {
