@@ -8,7 +8,6 @@ const path = require("path");
 const EmailRoute = require("./router/EmailRoute.js");
 const handlebars = require("express-handlebars");
 const CrudRoute = require("./router/CrudRoute.js");
-
 env.config();
 const app = express();
 const PORT = 3000 || process.env.PORT;
